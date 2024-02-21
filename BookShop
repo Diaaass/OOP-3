@@ -1,0 +1,54 @@
+import java.sql.*;
+import java.util.Scanner;
+
+public class BookShop {
+
+    public static void main(String[] args) {
+
+        try {
+            while (true) {
+                String url = "jdbc:postgresql://localhost:5432/BookStoreDB"; // Update the DB name
+                String user = "postgres";
+                String password = "NuOchenHard"; // Change as per your DB password
+                Connection connection = DriverManager.getConnection(url, user, password);
+                Scanner scanner = new Scanner(System.in);
+                BooksManager booksManager = new BooksManager(connection);
+
+                System.out.println("Choose an option:");
+                System.out.println("1. Add a book");
+                System.out.println("2. View all books");
+                System.out.println("3. Update a book");
+                System.out.println("4. Delete a book");
+                System.out.println("5. Exit");
+                System.out.print("Choose the number: ");
+
+                int option = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (option) {
+                    case 1:
+                        booksManager.addBook(scanner);
+                        break;
+                    case 2:
+                        booksManager.viewAllBooks();
+                        break;
+                    case 3:
+                        booksManager.updateBook(scanner);
+                        break;
+                    case 4:
+                        booksManager.deleteBook(scanner);
+                        break;
+                    case 5:
+                        System.out.println("Thanks for using our system.");
+                        return;
+                    default:
+                        System.out.println("Invalid option. Please choose again.");
+                }
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error accessing the database!");
+            e.printStackTrace();
+        }
+    }
+}

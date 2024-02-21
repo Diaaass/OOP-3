@@ -7,9 +7,9 @@ public class BookShop {
 
         try {
             while (true) {
-                String url = "jdbc:postgresql://localhost:5432/BookStoreDB"; // Update the DB name
+                String url = "jdbc:postgresql://localhost:5432/User"; 
                 String user = "postgres";
-                String password = "NuOchenHard"; // Change as per your DB password
+                String password = "postgres123";
                 Connection connection = DriverManager.getConnection(url, user, password);
                 Scanner scanner = new Scanner(System.in);
                 BooksManager booksManager = new BooksManager(connection);
